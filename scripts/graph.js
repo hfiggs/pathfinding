@@ -88,7 +88,7 @@ onmessage = function(e)
             }
         }
 
-        sleep(5);
+        sleep(3);
         postMessage([1,newNode]);
     }
 }

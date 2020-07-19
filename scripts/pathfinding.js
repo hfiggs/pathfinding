@@ -4,7 +4,7 @@ pathfinding = function(){
 var board = $('#board')[0];
 
 // board dimensions
-var cols = 25;
+var cols = 50;
 var rows = 25;
 
 // board data
@@ -167,8 +167,8 @@ function triggerPathFind()
 
 function updateCell(cellNum)
 {
-    let r = Math.floor(cellNum/rows);
-    let c = cellNum % rows;
+    let r = Math.floor(cellNum/cols);
+    let c = cellNum % cols;
     let cellId = r+'-'+c;
     if((cellId!=startCell.attr('id'))&&(cellId!=finishCell.attr('id')))
     {
@@ -207,8 +207,8 @@ async function drawPath(parent)
 
     while(parent[cellNum]!=-1)
     {
-        let r = Math.floor(cellNum/rows);
-        let c = cellNum % rows;
+        let r = Math.floor(cellNum/cols);
+        let c = cellNum % cols;
         let cellId = r+'-'+c;
         $('#'+cellId).removeClass();
         $('#'+cellId).addClass('path');
@@ -222,8 +222,8 @@ async function drawPath(parent)
 //////////////////////////////
 
 // generate game board html
-board.style.width = '40vw';
-board.style.height = Math.ceil(40*(rows/cols))+'vw';
+board.style.width = '80vw';
+board.style.height = Math.ceil(80*(rows/cols))+'vw';
 for(let r=0;r<rows;r++)
 {
     let row = board.appendChild(document.createElement('tr'));
@@ -239,11 +239,11 @@ for(let r=0;r<rows;r++)
 }
 
 // setup start/finish nodes
-var startCell = $('#0-0');
+var startCell = $('#'+Math.floor(rows/8)+'-'+Math.floor(cols/8));
 startCell.removeClass();
 startCell.addClass('start');
 
-var finishCell = $('#'+(rows-1)+'-'+(cols-1));
+var finishCell = $('#'+Math.floor(rows*7/8)+'-'+Math.floor(cols*7/8));
 finishCell.removeClass();
 finishCell.addClass('finish');
 
