@@ -221,9 +221,13 @@ async function drawPath(parent)
 //  Execution starts here   //
 //////////////////////////////
 
+// game board html window dimensions
+var width = 80;
+var height = Math.ceil((rows/cols)*width);
+
 // generate game board html
-board.style.width = '80vw';
-board.style.height = Math.ceil(80*(rows/cols))+'vw';
+board.style.width = width + 'vw';
+board.style.height = height + 'vw';
 for(let r=0;r<rows;r++)
 {
     let row = board.appendChild(document.createElement('tr'));
@@ -232,18 +236,20 @@ for(let r=0;r<rows;r++)
     {
         let id = row.appendChild(document.createElement('td')).id = r + '-' + c;
         let cell = $('#'+id);
-        cell.css('height', Math.floor((1/rows)*100) + '%');
-        cell.css('width', Math.floor((1/cols)*100) + '%');
+        cell.css('height', Math.floor((1/rows)*height) + 'vw');
+        cell.css('width', Math.floor((1/cols)*width) + 'vw');
         cell.addClass('unseen');
     }
 }
 
+var offset = Math.min(Math.floor(rows/8), Math.floor(cols/8))
+
 // setup start/finish nodes
-var startCell = $('#'+Math.floor(rows/8)+'-'+Math.floor(cols/8));
+var startCell = $('#'+offset+'-'+offset);
 startCell.removeClass();
 startCell.addClass('start');
 
-var finishCell = $('#'+Math.floor(rows*7/8)+'-'+Math.floor(cols*7/8));
+var finishCell = $('#'+(rows-offset-1)+'-'+(cols-offset-1));
 finishCell.removeClass();
 finishCell.addClass('finish');
 
